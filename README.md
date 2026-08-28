@@ -17,6 +17,8 @@ Svelte components generated from [Google's official Material Symbols / Material 
 
 Every icon is a standalone, tree-shakeable Svelte 5 component — no runtime dependencies, no icon fonts, no CSS imports. The whole package is produced by a single generator script: it reads the upstream SVGs and writes the publish-ready output straight into `dist/`, with no extra compilation step.
 
+> **Demo:** browse and search every icon at **https://material-svelte.kkoko.dev/**
+
 - [Installation](#installation)
 - [Usage](#usage)
 - [Direct Icon Imports](#direct-icon-imports)

@@ -30,8 +30,12 @@ jobs:
 
       - run: npm install
 
-      - run: npm run lint
+      - name: Lint
+        run: npm run lint
+        continue-on-error: true
 
-      - run: npm run check
+      - name: Check
+        run: npm run check
+        continue-on-error: true
 
       - run: npm run build

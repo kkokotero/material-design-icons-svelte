@@ -1,13 +1,14 @@
 {
 	"name": "material-design-icons-svelte",
 	"version": "0.1.0",
+	"private": false,
 	"description": "Svelte 5 components for Google's Material Design Icons — tree-shakeable, no runtime dependencies",
 	"license": "Apache-2.0",
 	"author": "kkokotero <is.kkokotero@gmail.com>",
 	"homepage": "https://github.com/kkokotero/material-design-icons-svelte#readme",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/kkokotero/material-design-icons-svelte.git"
+		"url": "git+https://github.com/kkokotero/material-design-icons-svelte.git"
 	},
 	"bugs": {
 		"url": "https://github.com/kkokotero/material-design-icons-svelte/issues"

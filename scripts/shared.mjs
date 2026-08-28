@@ -6,7 +6,7 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const pkgDir = join(root, 'node_modules', '@material-design-icons', 'svg');
 
 export const DIST_DIR = join(root, 'dist');
-export const DATA_DIR = join(root, 'src', 'lib', 'data', 'icons');
+export const DATA_DIR = join(root, 'src', 'lib', 'icons');
 
 export const VARIANTS = ['filled', 'outlined', 'round', 'sharp', 'two-tone'];
 export const CONCURRENCY = 32;

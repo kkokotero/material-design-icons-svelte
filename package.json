@@ -1,0 +1,118 @@
+{
+	"name": "material-design-icons-svelte",
+	"version": "0.1.0",
+	"description": "Svelte 5 components for Google's Material Design Icons — tree-shakeable, no runtime dependencies",
+	"license": "Apache-2.0",
+	"author": "kkokotero <is.kkokotero@gmail.com>",
+	"homepage": "https://github.com/kkokotero/material-design-icons-svelte#readme",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/kkokotero/material-design-icons-svelte.git"
+	},
+	"bugs": {
+		"url": "https://github.com/kkokotero/material-design-icons-svelte/issues"
+	},
+	"scripts": {
+		"dev": "npm run generate:data && vite dev",
+		"generate:data": "node scripts/generate-data.mjs",
+		"update:metadata": "node scripts/update-icon-metadata.mjs",
+		"generate:dist": "node scripts/generate-dist.mjs",
+		"generate:all": "npm run generate:dist --force && npm run generate:data --force",
+		"build:lib": "npm run generate:dist",
+		"build": "npm run generate:data && vite build && npm run prepack",
+		"preview": "vite preview",
+		"prepare": "svelte-kit sync || echo ''",
+		"prepack": "publint",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "biome check .",
+		"format": "biome format --write ."
+	},
+	"files": [
+		"dist",
+		"misc",
+		"LICENSE",
+		"README.md",
+		"!dist/**/*.test.*",
+		"!dist/**/*.spec.*"
+	],
+	"sideEffects": [
+		"**/*.css"
+	],
+	"type": "module",
+	"exports": {
+		"./filled": {
+			"types": "./dist/filled/index.d.ts",
+			"svelte": "./dist/filled/index.js",
+			"import": "./dist/filled/index.js"
+		},
+		"./filled/*.svelte": {
+			"types": "./dist/filled/*.d.ts",
+			"svelte": "./dist/filled/*.svelte"
+		},
+		"./outlined": {
+			"types": "./dist/outlined/index.d.ts",
+			"svelte": "./dist/outlined/index.js",
+			"import": "./dist/outlined/index.js"
+		},
+		"./outlined/*.svelte": {
+			"types": "./dist/outlined/*.d.ts",
+			"svelte": "./dist/outlined/*.svelte"
+		},
+		"./round": {
+			"types": "./dist/round/index.d.ts",
+			"svelte": "./dist/round/index.js",
+			"import": "./dist/round/index.js"
+		},
+		"./round/*.svelte": {
+			"types": "./dist/round/*.d.ts",
+			"svelte": "./dist/round/*.svelte"
+		},
+		"./sharp": {
+			"types": "./dist/sharp/index.d.ts",
+			"svelte": "./dist/sharp/index.js",
+			"import": "./dist/sharp/index.js"
+		},
+		"./sharp/*.svelte": {
+			"types": "./dist/sharp/*.d.ts",
+			"svelte": "./dist/sharp/*.svelte"
+		},
+		"./two-tone": {
+			"types": "./dist/two-tone/index.d.ts",
+			"svelte": "./dist/two-tone/index.js",
+			"import": "./dist/two-tone/index.js"
+		},
+		"./two-tone/*.svelte": {
+			"types": "./dist/two-tone/*.d.ts",
+			"svelte": "./dist/two-tone/*.svelte"
+		}
+	},
+	"peerDependencies": {
+		"svelte": "^5.0.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.5.9",
+		"@material-design-icons/svg": "^0.14.15",
+		"@sveltejs/adapter-auto": "^7.0.1",
+		"@sveltejs/kit": "^2.63.0",
+		"@sveltejs/package": "^2.5.8",
+		"@sveltejs/vite-plugin-svelte": "^7.1.2",
+		"@types/node": "^24",
+		"publint": "^0.3.21",
+		"shiki": "^4.4.3",
+		"svelte": "^5.56.1",
+		"svelte-awesome-color-picker": "^4.1.3",
+		"svelte-check": "^4.6.0",
+		"typescript": "^6.0.3",
+		"vite": "^8.0.16"
+	},
+	"keywords": [
+		"svelte",
+		"svelte5",
+		"material-design",
+		"material-icons",
+		"material-symbols",
+		"icons",
+		"svg"
+	]
+}

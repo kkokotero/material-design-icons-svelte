@@ -21,10 +21,16 @@ const asideContext = setAsideContext(false);
 const iconContext = setIconContext();
 
 $effect(() => {
-  if (filterContext.value.color === undefined ||
-    filterContext.value.color === "#fbfbfb" ||
-    filterContext.value.color === "#323232") {
-    filterContext.value.color = themeContext.value === 'dark' ? "#fbfbfb" : "#323232";
+  const c = filterContext.value.color?.toLowerCase();
+  if (
+    c === undefined ||
+    c === '#fbfbfb' ||
+    c === '#323232' ||
+    c === '#000000' ||
+    c === '' ||
+    c === '#'
+  ) {
+    filterContext.value.color = themeContext.value === 'dark' ? '#fbfbfb' : '#323232';
   }
 })
 </script>

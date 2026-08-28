@@ -9,6 +9,7 @@ import Style from 'material-design-icons-svelte/outlined/Style.svelte';
 import { page } from '$app/state';
 import { getAsideContext } from '$lib/context/aside.svelte';
 import { getFilterContext } from '$lib/context/filter.svelte';
+import { getThemeContext } from '$lib/context/theme.svelte';
 import { type Icon, VARIANTS, type Variant } from '$lib/icons';
 import { ICON_CATEGORIES, type IconCategory } from '$lib/icons/metadata';
 import { formatIconName } from '$lib/utils/format';
@@ -19,6 +20,7 @@ const icon: Icon | undefined = $derived((page.params.icon as Icon) ?? undefined)
 
 const filterContext = getFilterContext();
 const asideContext = getAsideContext();
+const themeContext = getThemeContext();
 
 let dialogOpen = $state(false);
 let dialogCategory = $state('');
@@ -26,8 +28,19 @@ let dialogCategory = $state('');
 const hasFilters = $derived(
 	filterContext.value.category !== 'all' ||
 		filterContext.value.query !== '' ||
-		(filterContext.value.color !== '#fbfbfb' && filterContext.value.color !== '#323232')
+		(filterContext.value.color !== undefined &&
+			filterContext.value.color.toLowerCase() !== '#fbfbfb' &&
+			filterContext.value.color.toLowerCase() !== '#323232' &&
+			filterContext.value.color.toLowerCase() !== '#000000' &&
+			filterContext.value.color !== '')
 );
+
+// Color efectivo para el input: si es undefined/#000000/vacío, usa el default del theme creado en +layout.svelte
+const effectiveColor = $derived.by(() => {
+	const c = filterContext.value.color?.toLowerCase();
+	if (!c || c === '#000000' || c === '#' || c === '') return themeContext.value === 'dark' ? '#fbfbfb' : '#323232';
+	return filterContext.value.color as string;
+});
 
 const FULL_ROW_CATEGORIES = new Set<IconCategory>([
 	'communication',
@@ -140,7 +153,8 @@ function onSubmit(event: SubmitEvent) {
 			<div class="color-picker">
 				<input
 					type="color"
-					bind:value={filterContext.value.color}
+					value={effectiveColor}
+					oninput={(e) => (filterContext.color = (e.currentTarget as HTMLInputElement).value)}
 					class="color-picker__input"
 					aria-label="Choose color"
 					name="color-picker"
@@ -149,19 +163,23 @@ function onSubmit(event: SubmitEvent) {
 
 				<div
 					class="filter-aside__color--preview"
-					style="--input-color: {filterContext.value.color}"
+					style="--input-color: {effectiveColor}"
 				></div>
 			</div>
 			<input
 				type="text"
 				class="filter-aside__color--value"
-				bind:value={filterContext.value.color}
+				value={effectiveColor}
 				name="color-value"
 				id="color-value"
 				oninput={(event) => {
-     			const input = event.currentTarget as HTMLInputElement;
-     			const value = input.value;
-                filterContext.color = value.startsWith('#') ? value : `#${value}`;
+      			const input = event.currentTarget as HTMLInputElement;
+      			const value = input.value.trim();
+      			if (!value || value === '#' || value.toLowerCase() === '#000000') {
+      				filterContext.color = undefined;
+      				return;
+      			}
+                 filterContext.color = value.startsWith('#') ? value : `#${value}`;
 				}}
 			/>
 			{#if filterContext.value.color !== "#fbfbfb" && filterContext.value.color !== "#323232"}

@@ -55,7 +55,7 @@ export function setFilterContext(initial: Partial<FilterState> = {}) {
 		if (urlCategory !== null) initialFilters.category = urlCategory;
 		if (urlVariant !== null) initialFilters.variant = urlVariant;
 		if (urlStrokeWidth !== null) initialFilters.strokeWidth = urlStrokeWidth;
-		if (urlColor !== null) initialFilters.color = urlColor;
+		if (urlColor !== null && urlColor.toLowerCase() !== '#000000' && urlColor !== '') initialFilters.color = urlColor;
 	}
 
 	// 2. Define reactive state using the $state rune
@@ -93,7 +93,8 @@ export function setFilterContext(initial: Partial<FilterState> = {}) {
 			url.searchParams.delete('stroke-width');
     }
 
-    if (filters.color !== undefined) {
+    const normalizedColor = filters.color?.toLowerCase();
+    if (filters.color !== undefined && normalizedColor !== '#000000' && normalizedColor !== '' && normalizedColor !== '#') {
       url.searchParams.set('color', filters.color);
 		} else {
 			url.searchParams.delete('color');

@@ -26,8 +26,9 @@ vite.config.ts.timestamp-*
 # Dependencies
 node_modules/
 
-# Package manager lockfiles (keep npm lockfile for CI reproducibility)
-# package-lock.json intentionally tracked for npm ci/cache
+# Package manager lockfiles
+package-lock.json
+npm-shrinkwrap.json
 pnpm-lock.yaml
 yarn.lock
 bun.lock

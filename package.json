@@ -6,7 +6,7 @@
 	"license": "Apache-2.0",
 	"author": "kkokotero <is.kkokotero@gmail.com>",
 	"homepage": "https://github.com/kkokotero/material-design-icons-svelte#readme",
- "publishConfig": {
+	"publishConfig": {
 		"access": "public"
 	},
 	"repository": {

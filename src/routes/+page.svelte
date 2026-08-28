@@ -19,6 +19,11 @@ const {
 } = $derived(iconContext.value);
 </script>
 
+<svelte:head>
+	<title>Material Design Icons</title>
+</svelte:head>
+
+
 {#if !isValidVariant}
 	<HeroMessage message="Invalid variant.">
 		<div class="hero-buttons">

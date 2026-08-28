@@ -42,7 +42,11 @@ function handleDownload(target: TargetDownload) {
 
 	switch (target) {
 		case 'png':
-			createDownloadPng(activeIcons?.[icon] ?? '', { filename: `${icon}.png` });
+			createDownloadPng(activeIcons?.[icon] ?? '', {
+				filename: `${icon}.png`,
+				color: filterContext.value.color,
+				strokeWidth: filterContext.value.strokeWidth ?? 0
+			});
 			break;
 		case 'svg':
 			createDownloadSvg(activeIcons?.[icon] ?? '', `${icon}.svg`);
@@ -50,6 +54,10 @@ function handleDownload(target: TargetDownload) {
 	}
 }
 </script>
+
+<svelte:head>
+	<title>{formatIconName(icon)}</title>
+</svelte:head>
 
 {#if !isValidIcon}
 	<HeroMessage message="Icon not found.">
@@ -295,17 +303,58 @@ function handleDownload(target: TargetDownload) {
 	margin: 0;
 }
 
+.icon--content__head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.icon--content__title {
+	font-size: 3rem;
+	margin: 0;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
 @media (width <= 768px) {
 	.icon--container {
 		grid-template-columns: 1fr;
+		max-width: 90dvw;
+		margin: 0 auto;
+		padding: 0;
 	}
+
 	.icon--wrapper {
 		position: relative;
 		top: 0;
+		padding: 1.5rem;
+		border-radius: 2rem;
+		max-width: 90dvw;
+	}
+
+	.icon--wrapper :global(svg) {
+		font-size: 3rem;
 	}
 
 	.icon--content {
 		grid-column: span 1;
+		padding: 1rem;
+		max-width: 90dvw;
+		width: 100%;
+	}
+
+	.icon--content__title {
+		font-size: 1.8rem;
+	}
+
+	.icon--content__section--title {
+		font-size: 1.4rem;
+	}
+
+	.icon--content__head {
+		gap: 0.5rem;
 	}
 }
 </style>

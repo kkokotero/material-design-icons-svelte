@@ -20,14 +20,15 @@ export function createDownloadSvg(svg: string, filename = 'icon.svg'): void {
 type PngOptions = {
 	filename?: string;
 	size?: number;
-	color?: string;
+  color?: string;
+	strokeWidth?: number;
 };
 
 export async function createDownloadPng(
 	svg: string,
-	{ filename = 'icon.png', size = 512, color = '#000000' }: PngOptions = {}
+	{ filename = 'icon.png', size = 512, color = '#000000', strokeWidth = 0 }: PngOptions = {}
 ): Promise<void> {
-	const coloredSvg = svg.replace(/currentColor/g, color);
+	const coloredSvg = svg.replace(/currentColor/g, color).replace("<svg ", `<svg style="stroke-width: ${strokeWidth}px;" `);
 
 	const blob = new Blob([coloredSvg], {
 		type: 'image/svg+xml;charset=utf-8'

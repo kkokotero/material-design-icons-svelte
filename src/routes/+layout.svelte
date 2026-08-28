@@ -8,6 +8,7 @@ import { setAsideContext } from '$lib/context/aside.svelte';
 import { setFilterContext } from '$lib/context/filter.svelte';
 import { setIconContext } from '$lib/context/icon.svelte';
 import { setThemeContext } from '$lib/context/theme.svelte';
+import favicon from '$lib/assets/favicon.ico';
 
 type Props = {
 	children: Snippet;
@@ -36,6 +37,7 @@ $effect(() => {
 </script>
 
 <svelte:head>
+    <link rel="icon" href={favicon} />
 	<title>Material Design Icons Svelte</title>
 	<meta name="theme-color" content={themeContext.value} />
 	<meta name="query-search" content={filterContext.query} />
@@ -100,6 +102,7 @@ $effect(() => {
 	width: 100%;
 	height: auto;
 	z-index: 1;
+	max-width: 100dvw;
 }
 
 .app-main footer {

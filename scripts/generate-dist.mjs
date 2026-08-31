@@ -1,5 +1,6 @@
 import { promises as fs } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
 	CONCURRENCY,
 	DIST_DIR,
@@ -9,6 +10,9 @@ import {
 	readVariantJobs,
 	VARIANTS
 } from './shared.mjs';
+
+const root = dirname(dirname(fileURLToPath(import.meta.url)));
+const pkgPath = join(root, 'package.json');
 
 const FORCE = process.argv.includes('--force');
 
@@ -130,3 +134,35 @@ for (const variant of VARIANTS) {
 }
 
 console.log(`Done. ${generated} generated, ${skipped} skipped.`);
+
+// Sync package.json exports — fix for *.svelte subpath types + default fallback
+// Ensures `import Check from '.../outlined/Check.svelte'` resolves types and runtime
+// without requiring customConditions: ["svelte"] from the consumer.
+const expectedExports = {};
+for (const variant of VARIANTS) {
+	expectedExports[`./${variant}`] = {
+		types: `./dist/${variant}/index.d.ts`,
+		svelte: `./dist/${variant}/index.js`,
+		import: `./dist/${variant}/index.js`
+	};
+	expectedExports[`./${variant}/*.svelte`] = {
+		types: `./dist/${variant}/*.svelte.d.ts`,
+		svelte: `./dist/${variant}/*.svelte`,
+		default: `./dist/${variant}/*.svelte`
+	};
+}
+
+try {
+	const pkgRaw = await fs.readFile(pkgPath, 'utf8');
+	const pkg = JSON.parse(pkgRaw);
+	const current = JSON.stringify(pkg.exports);
+	const expected = JSON.stringify(expectedExports);
+	if (current !== expected) {
+		pkg.exports = expectedExports;
+		// Preserve tab indentation used in this repo
+		await fs.writeFile(pkgPath, `${JSON.stringify(pkg, null, '\t')}\n`);
+		console.log('Updated package.json exports');
+	}
+} catch (e) {
+	console.warn('Could not sync package.json exports:', e);
+}

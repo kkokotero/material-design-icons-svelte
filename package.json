@@ -52,8 +52,9 @@
 			"import": "./dist/filled/index.js"
 		},
 		"./filled/*.svelte": {
-			"types": "./dist/filled/*.d.ts",
-			"svelte": "./dist/filled/*.svelte"
+			"types": "./dist/filled/*.svelte.d.ts",
+			"svelte": "./dist/filled/*.svelte",
+			"default": "./dist/filled/*.svelte"
 		},
 		"./outlined": {
 			"types": "./dist/outlined/index.d.ts",
@@ -61,8 +62,9 @@
 			"import": "./dist/outlined/index.js"
 		},
 		"./outlined/*.svelte": {
-			"types": "./dist/outlined/*.d.ts",
-			"svelte": "./dist/outlined/*.svelte"
+			"types": "./dist/outlined/*.svelte.d.ts",
+			"svelte": "./dist/outlined/*.svelte",
+			"default": "./dist/outlined/*.svelte"
 		},
 		"./round": {
 			"types": "./dist/round/index.d.ts",
@@ -70,8 +72,9 @@
 			"import": "./dist/round/index.js"
 		},
 		"./round/*.svelte": {
-			"types": "./dist/round/*.d.ts",
-			"svelte": "./dist/round/*.svelte"
+			"types": "./dist/round/*.svelte.d.ts",
+			"svelte": "./dist/round/*.svelte",
+			"default": "./dist/round/*.svelte"
 		},
 		"./sharp": {
 			"types": "./dist/sharp/index.d.ts",
@@ -79,8 +82,9 @@
 			"import": "./dist/sharp/index.js"
 		},
 		"./sharp/*.svelte": {
-			"types": "./dist/sharp/*.d.ts",
-			"svelte": "./dist/sharp/*.svelte"
+			"types": "./dist/sharp/*.svelte.d.ts",
+			"svelte": "./dist/sharp/*.svelte",
+			"default": "./dist/sharp/*.svelte"
 		},
 		"./two-tone": {
 			"types": "./dist/two-tone/index.d.ts",
@@ -88,8 +92,9 @@
 			"import": "./dist/two-tone/index.js"
 		},
 		"./two-tone/*.svelte": {
-			"types": "./dist/two-tone/*.d.ts",
-			"svelte": "./dist/two-tone/*.svelte"
+			"types": "./dist/two-tone/*.svelte.d.ts",
+			"svelte": "./dist/two-tone/*.svelte",
+			"default": "./dist/two-tone/*.svelte"
 		}
 	},
 	"peerDependencies": {
